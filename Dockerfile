@@ -32,9 +32,9 @@ RUN chmod 664 /etc/kea-dhcp4/kea-dhcp4.conf
 COPY kea-dhcp4.ddns /etc/kea-ddns/kea-dhcp4.ddns
 RUN chown _kea:_kea /etc/kea-ddns/kea-dhcp4.ddns
 RUN chmod 664 /etc/kea-ddns/kea-dhcp4.ddns
-COPY kea-dhcp4.options /etc/kea-option-data/kea-dhcp4.options
-RUN chown _kea:_kea /etc/kea-option-data/kea-dhcp4.options
-RUN chmod 664 /etc/kea-option-data/kea-dhcp4.options
+COPY kea-dhcp4.options /etc/kea-options/kea-dhcp4.options
+RUN chown _kea:_kea /etc/kea-options/kea-dhcp4.options
+RUN chmod 664 /etc/kea-options/kea-dhcp4.options
 COPY kea-dhcp4.subnets /etc/kea-subnets/kea-dhcp4.subnets
 RUN chown _kea:_kea /etc/kea-subnets/kea-dhcp4.subnets
 RUN chmod 664 /etc/kea-subnets/kea-dhcp4.subnets
