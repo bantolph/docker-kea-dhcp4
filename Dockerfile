@@ -16,9 +16,10 @@ RUN mkdir -p /etc/kea-ddns && chown root:_kea /etc/kea-ddns/ && chmod 755 /etc/k
 RUN mkdir -p /etc/kea-subnets && chown root:_kea /etc/kea-subnets/ && chmod 755 /etc/kea-subnets
 RUN mkdir -p /etc/kea-option-data && chown root:_kea /etc/kea-option-data/ && chmod 755 /etc/kea-option-data
 RUN mkdir -p /var/log/kea && chown _kea:_kea /var/log/kea && chmod 755 /var/log/kea
+RUN mkdir -p /var/lib/kea && chown _kea:_kea /var/lib/kea && chmod 755 /var/lib/kea
 RUN mkdir -p /run/kea && chown _kea:_kea /run/kea && chmod 755 /run/kea
 
-VOLUME ["/etc/kea-subnets"]
+VOLUME ["/etc/kea-subnets", "/var/lib/kea"]
 
 ENV CONTROL_AGENT_PORT 8000
 ENV CONTROL_AGENT_HOST 0.0.0.0
