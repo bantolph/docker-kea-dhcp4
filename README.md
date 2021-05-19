@@ -100,6 +100,49 @@ Option data for DHCP responses that should be used as a default for all subnets 
         }
     ],
 ```
-/etc/kea-subnets/kea-dhcp4.subnets
+
+Subnets can be added to serve leases by editing or providing the file `/etc/kea-subnets/kea-dhcp4.subnets`.  This one is again empty, but by adding "subnet4" data, leases can be provided:
+``"subnet4": [
+    {
+        // Subnet Delcaration - WLAN Network
+        "subnet": "172.16.4.0/24",
+
+        // Reservtion Pools
+        "pools": [ { "pool": "172.16.4.100 - 172.16.4.200" } ],
+
+        // Subnet specific options
+        "option-data": [
+            {
+                // For each IPv4 subnet you most likely need to specify at
+                // least one router.
+                "name": "routers",
+                "data": "172.16.4.1"
+            }
+        ]
+    },
+    {
+        // Subnet Delcaration - Another subnet
+        "subnet": "172.16.251.0/24",
+
+        // Reservtion Pools
+        "pools": [ { "pool": "172.16.251.100 - 172.16.251.200" } ],
+
+        // Subnet specific options
+        "option-data": [
+            {
+                // For each IPv4 subnet you most likely need to specify at
+                // least one router.
+                "name": "routers",
+                "data": "172.16.251.1"
+            },
+            {
+                // Just one restriced DNS for this subnet
+                "name": "domain-name-servers",
+                "data": "10.0.1.53"
+            }
+        ]
+    }
+],
+```
 
 
