@@ -10,7 +10,7 @@ CONTROL_AGENT_PORT
 CONTROL_AGENT_HOST
 ```
 
-CONTORL_AGENT_PORT defaults to 8000, and the CONTROL_AGENT_HOST is 0.0.0.0 so it will listen on any interface/address.
+CONTROL_AGENT_PORT defaults to 8000, and the CONTROL_AGENT_HOST is 0.0.0.0 so it will listen on any interface/address.
 
 The DHCP4 daemon reads in `/etc/kea-dhcp4/kea-dhcp4.conf` as it's starting configuraiton file which includes other files for DDNS (Dynamic DNS) updates, general DHCP options, and subenetting information :
 
@@ -63,8 +63,43 @@ The DHCP4 daemon reads in `/etc/kea-dhcp4/kea-dhcp4.conf` as it's starting confi
 
 The provided configuration file starts up a very bare, non-functional, DHCP service.  
 
-/etc/kea-ddns/kea-dhcp4.ddns
-/etc/kea-option-data/kea-dhcp4.options
+To provide the server where the KEA DDNS Update service resides, the `/etc/kea-ddns/kea-dhcp4.ddns` file should be populated with the "dhcp-ddns" section of the configuration.  By default this is empty, but the following configuration can be used as an example on how to setup this service:
+```
+    "dhcp-ddns": {
+        "enable-updates": true,
+        "qualifying-suffix": "example.com.",
+        "server-ip": "192.0.2.1",
+        "server-port": 53001,
+        "hostname-char-set": "[^A-Za-z0-9.-]",
+        "hostname-char-replacement": "X"
+    },
+```
+
+Option data for DHCP responses that should be used as a default for all subnets can be configured by adding them in the `/etc/kea-option-data/kea-dhcp4.options` file.  Again, this is empty by default.  The following configuration can be used as an example:
+```
+    "option-data": [
+        {
+            "name": "domain-name-servers",
+            "data": "10.0.1.53, 10.0.0.53"
+        },
+        {
+            "name": "domain-name",
+            "data": "example.com"
+        },
+        {
+            "name": "ntp-servers",
+            "data": "10.0.0.123"
+        },
+        {
+            "name": "log-servers",
+            "data": "10.0.0.14, 10.0.1.14"
+        },
+        {
+            "name": "domain-search",
+            "data": "example.net, example.de, example.fr"
+        }
+    ],
+```
 /etc/kea-subnets/kea-dhcp4.subnets
 
 
