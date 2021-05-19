@@ -102,7 +102,8 @@ Option data for DHCP responses that should be used as a default for all subnets 
 ```
 
 Subnets can be added to serve leases by editing or providing the file `/etc/kea-subnets/kea-dhcp4.subnets`.  This one is again empty, but by adding "subnet4" data, leases can be provided:
-``"subnet4": [
+```
+"subnet4": [
     {
         // Subnet Delcaration - WLAN Network
         "subnet": "172.16.4.0/24",
