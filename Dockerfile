@@ -23,6 +23,8 @@ VOLUME ["/etc/kea-subnets", "/var/lib/kea"]
 
 ENV CONTROL_AGENT_PORT 8000
 ENV CONTROL_AGENT_HOST 0.0.0.0
+# Set the debug environment variable to an integer to turn on debugging
+ENV DEBUG 20
 
 EXPOSE 67/udp $CONTROL_AGENT_PORT/tcp
 
